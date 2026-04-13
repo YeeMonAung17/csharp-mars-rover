@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarsRover
 {
-    internal class PlateauSize
+    public class PlateauSize
     {
         public int MaxX { get; set; }
         public int MaxY { get; set; }
