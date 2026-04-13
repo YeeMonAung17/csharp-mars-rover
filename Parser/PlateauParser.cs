@@ -8,7 +8,7 @@ namespace MarsRover
 {
     public class PlateauParser
     {
-        public static PlateauSize Parse (string input)
+        public static Plateau Parse (string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -33,7 +33,7 @@ namespace MarsRover
                 throw new ArgumentException("maxX and maxY must be non-negative integers");
             }
 
-            return new PlateauSize(maxX, maxY);
+            return new Plateau(maxX, maxY);
         }
     }
 }
