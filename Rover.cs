@@ -15,7 +15,26 @@ namespace MarsRover
 
         public Rover(Position initialPosition)
         {
-            Position = initialPosition;
+            Position = initialPosition ?? throw new ArgumentNullException(nameof(initialPosition), "Initial position cannot be null.");
+        }
+
+
+        public Position GetNextPosition()
+        {
+                       return Position.Direction switch
+            {
+                Direction.North => new Position(Position.X, Position.Y + 1, Position.Direction),
+                Direction.East => new Position(Position.X + 1, Position.Y, Position.Direction),
+                Direction.South => new Position(Position.X, Position.Y - 1, Position.Direction),
+                Direction.West => new Position(Position.X - 1, Position.Y, Position.Direction),
+                _ => throw new InvalidOperationException("Invalid direction")
+            };
+        }
+
+
+        public void GoStraight()
+        {
+            Position = GetNextPosition();
         }
 
         public void RotateLeft()
@@ -46,32 +65,10 @@ namespace MarsRover
             Position = new Position(Position.X, Position.Y, newDirection);
         }
 
-        public void goStraight(PlateauSize plateau)
-        {
+       
 
-           
-            Position newPosition = Position.Direction switch
-            {
-                Direction.North => new Position(Position.X, Position.Y + 1, Position.Direction),
-                Direction.East => new Position(Position.X + 1, Position.Y, Position.Direction),
-                Direction.South => new Position(Position.X, Position.Y - 1, Position.Direction),
-                Direction.West => new Position(Position.X - 1, Position.Y, Position.Direction),
-                _ => throw new InvalidOperationException("Invalid direction")
-            };
-
-            if (plateau.IsWithinBounds(newPosition))
-            {
-                Position = newPosition;
-            }
-
-            else
-            {
-                throw new InvalidOperationException("Move would go out of bounds");
-            }
-
-
-
-        }
+        public string TakePhoto() => "Photo taken";
+        public string CollectSample() => "Sample collected";
 
 
     }
